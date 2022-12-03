@@ -18,16 +18,14 @@ TESTDATA = """1000
 """
 
 
-def read_calories_to_arr(input):
-    with open(input, "r") as f:
+def read_calories_to_arr(infile):
+    with open(infile, "r") as f:
         return [x.strip() for x in f.readlines()]
 
 
 def calories_per_elf(calorie_array):
     curelf = 0
-    elfsums = {}
-
-    elfsums[curelf] = 0
+    elfsums = {curelf: 0}
 
     for line in calorie_array:
         if line != "":
