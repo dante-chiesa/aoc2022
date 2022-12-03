@@ -1,3 +1,5 @@
+import heapq
+
 INPUT_FILE = "input.txt"
 
 # just for REPL
@@ -72,6 +74,27 @@ def highest_three_calories(per_elf):
     return top3
 
 
+def calories_per_elf_v2(calorie_array):
+    # improved version uses a list instead of a dict as
+    # we actually never cared about which elf was which and don't need the indices
+    cals = [0]
+    cur = 0
+    for line in calorie_array:
+        if line != "":
+            cals[cur] += int(line)
+        else:
+            cur = cur + 1
+            cals.append(0)
+    return cals
+
+
+def highest_three_calories_v2(cals_list):
+    # improved version uses the heap functions from standard library
+    # hey, data structures are cool!
+    heapq.heapify(cals_list)
+    return heapq.nlargest(3, cals_list)
+
+
 if __name__ == "__main__":
     arr = read_calories_to_arr(INPUT_FILE)
     perelf = calories_per_elf(arr)
@@ -80,3 +103,7 @@ if __name__ == "__main__":
 
     top3 = highest_three_calories(perelf)
     print(f"top 3: {top3}, sum: {sum([x[1] for x in top3])}")
+
+    perelf_v2 = calories_per_elf_v2(arr)
+    top3_v2 = highest_three_calories_v2(perelf_v2)
+    print(f"top 3 (alternate method): {top3_v2}, sum: {sum(top3_v2)}")
