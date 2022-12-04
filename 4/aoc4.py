@@ -18,7 +18,7 @@ def pairs_partially_overlap(line: list[list[int]]):
         # rhs overlaps high end of lhs
         | ((line[0][1] >= line[1][0]) & (line[0][1] <= line[1][1]))
     )
-    return low_overlap | high_overlap | pairs_wholly_overlap(line)
+    return low_overlap | high_overlap
 
 
 if __name__ == "__main__":
