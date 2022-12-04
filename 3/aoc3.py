@@ -13,7 +13,7 @@ def find_char_out_of_place(line: str):
     return shared_letter
 
 
-def find_common_in_group(group: tuple[str, str, str]):
+def find_common_in_group(group: list[str]):
     return (set(group[0]) & set(group[1]) & set(group[2])).pop()
 
 
@@ -22,9 +22,6 @@ if __name__ == "__main__":
     lines = [letter_score(find_char_out_of_place(line)) for line in inputdata]
     print(f"Total sum: {sum(lines)}")
 
-    groups = [
-        (inputdata[x], inputdata[x + 1], inputdata[x + 2])
-        for x in range(0, len(inputdata), 3)
-    ]
+    groups = [inputdata[x : x + 3] for x in range(0, len(inputdata), 3)]
     p2vals = [letter_score(find_common_in_group(g)) for g in groups]
     print(f"Part2 sum: {sum(p2vals)}")
