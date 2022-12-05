@@ -44,19 +44,20 @@ def process_moves(
 
 
 if __name__ == "__main__":
+    import copy
+
     infile = open("input.txt").read().split("\n\n")
 
     stacks = infile[0]
     moves = infile[1].split("\n")[:-1]
 
     buckets1 = parse_stacks(stacks)
+    buckets2 = copy.deepcopy(buckets1)  # needed for part 2 since the solution mutates it
+
     final_buckets = process_moves(buckets1, moves)
     answer = "".join([final_buckets[i][-1] for i in final_buckets])
     print(f"Part 1: {answer}")
 
-    # deep copying a dict is a PITA so instead of copying it earlier
-    # we'll just re-parse
-    buckets2 = parse_stacks(stacks)
     final_buckets2 = process_moves(buckets2, moves, v2=True)
     answer2 = "".join([final_buckets2[i][-1] for i in final_buckets2])
     print(f"Part 2: {answer2}")
