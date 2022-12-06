@@ -32,6 +32,22 @@ def find_first_n_different(msg: str, n: int) -> int:
     raise "no index found! :("
 
 
+# fmt: off
+# @formatter:off
+def codegolf_solution():
+    """
+    A 'fun' solution rewriting the whole find-first-n function as a comprehension
+    """
+
+    def f(m, n):
+        return next(i+1 for i in range(n-1, len(m)) if (all((m[k] not in m[i-n+1:k] for k in range(i,i-n,-1)))))
+    m=open("input.txt").read()
+    print(f"1: {f(m,4)}, 2:{f(m,14)}")
+
+# @formatter:on
+# fmt: on
+
+
 def main() -> None:
     import sys
 
